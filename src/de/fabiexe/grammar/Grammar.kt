@@ -15,6 +15,7 @@ interface Grammar<T> {
         fun symbol(symbols: Collection<Char>): Grammar<Char> = CharSymbolGrammar(symbols)
 
         @JvmStatic
+        @JvmSafeVarargs
         fun symbol(vararg symbols: Char): Grammar<Char> = CharSymbolGrammar(symbols.toSet())
 
         @JvmStatic
@@ -24,12 +25,14 @@ interface Grammar<T> {
         fun <T> sequence(grammars: List<Grammar<T>>): Grammar<List<T>> = SequenceGrammar(grammars)
 
         @JvmStatic
+        @JvmSafeVarargs
         fun <T> sequence(vararg grammars: Grammar<out T>): Grammar<List<T>> = SequenceGrammar(grammars.toList())
 
         @JvmStatic
         fun <T> choice(grammars: List<Grammar<T>>): Grammar<T> = ChoiceGrammar(grammars)
 
         @JvmStatic
+        @JvmSafeVarargs
         fun <T> choice(vararg grammars: Grammar<out T>): Grammar<T> = ChoiceGrammar(grammars.toList())
 
         @JvmStatic
