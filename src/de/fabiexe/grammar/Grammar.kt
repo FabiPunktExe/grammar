@@ -1,12 +1,11 @@
 package de.fabiexe.grammar
 
-import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
 interface Grammar<T> {
     fun parse(input: String): ParseResult<T>
 
-    fun <U> transform(transform: (T) -> U): Grammar<U> = TransformingGrammar(this, transform)
+    fun <U> transform(transform: (token: T) -> U): Grammar<U> = TransformingGrammar(this, transform)
 
     fun repeat(): Grammar<List<T>> = RepeatingGrammar(this, 0)
 
@@ -41,6 +40,6 @@ interface Grammar<T> {
         fun <T> choice(vararg grammars: Grammar<out T>): Grammar<T> = ChoiceGrammar(grammars.toList())
 
         @JvmStatic
-        fun <T> recursive(definition: (Grammar<T>) -> Grammar<T>): Grammar<T> = RecursiveGrammar(definition)
+        fun <T> recursive(definition: (self: Grammar<T>) -> Grammar<T>): Grammar<T> = RecursiveGrammar(definition)
     }
 }
