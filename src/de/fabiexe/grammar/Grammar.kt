@@ -5,6 +5,8 @@ import kotlin.jvm.JvmStatic
 interface Grammar<T> {
     fun parse(input: String): ParseResult<T>
 
+    fun <U> transform(transform: (T) -> U): Grammar<U> = TransformingGrammar(this, transform)
+
     companion object {
         @JvmStatic
         fun empty(): Grammar<Unit> = EmptyGrammar
