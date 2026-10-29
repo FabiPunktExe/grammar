@@ -7,13 +7,16 @@ interface Grammar<T> {
 
     companion object {
         @JvmStatic
+        fun empty(): Grammar<Unit> = EmptyGrammar
+
+        @JvmStatic
         fun symbol(symbols: Collection<Char>): Grammar<Char> = CharSymbolGrammar(symbols)
 
         @JvmStatic
         fun symbol(vararg symbols: Char): Grammar<Char> = CharSymbolGrammar(symbols.toSet())
 
         @JvmStatic
-        fun symbol(string: String): Grammar<Unit> = StringSymbolGrammar(string)
+        fun symbol(string: String): Grammar<String> = StringSymbolGrammar(string)
 
         @JvmStatic
         fun <T> sequence(grammars: List<Grammar<T>>): Grammar<List<T>> = SequenceGrammar(grammars)

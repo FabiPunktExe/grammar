@@ -7,10 +7,10 @@ class StringSymbolGrammarTest {
 
     @Test
     fun testExpectedTokens() {
-        assertToken(Unit, 5, grammar.parse("hello"))
-        assertToken(Unit, 5, grammar.parse("hello world"))
-        assertToken(Unit, 0, StringSymbolGrammar("").parse("abc"))
-        assertToken(Unit, 1, StringSymbolGrammar("a").parse("abc"))
+        assertToken("hello", 5, grammar.parse("hello"))
+        assertToken("hello", 5, grammar.parse("hello world"))
+        assertToken("", 0, StringSymbolGrammar("").parse("abc"))
+        assertToken("a", 1, StringSymbolGrammar("a").parse("abc"))
     }
 
     @Test
