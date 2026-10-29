@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Test (jvm)" type="Amper.Run">
+    <option name="command" value="test" />
+    <EXTENSION ID="amper.test.command">
+      <platforms>
+        <option value="jvm" />
+      </platforms>
+    </EXTENSION>
+    <method v="2" />
+  </configuration>
+</component>
