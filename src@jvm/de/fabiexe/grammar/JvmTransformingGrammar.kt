@@ -6,7 +6,7 @@ class JvmTransformingGrammar<T, U>(val grammar: Grammar<T>, val transform: Funct
     override fun parse(input: String): ParseResult<U> {
         return when (val result = grammar.parse(input)) {
             is ParseResult.Token -> ParseResult.Token(transform.apply(result.token), result.position)
-            is ParseResult.Failure -> ParseResult.Failure(result.error, result.position)
+            is ParseResult.Failure -> result
         }
     }
 }

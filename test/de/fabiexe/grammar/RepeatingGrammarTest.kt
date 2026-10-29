@@ -30,7 +30,7 @@ class RepeatingGrammarTest {
     @Test
     fun testFailsBelowMin() {
         val grammar = Grammar.symbol('a').repeat(3)
-        assertFailure("Expected a symbol", 2, grammar.parse("aab"))
-        assertFailure("Expected a symbol", 0, grammar.parse(""))
+        assertFailure("Expected one of ['a']", 2, grammar.parse("aab"))
+        assertFailure("Expected one of ['a']", 0, grammar.parse(""))
     }
 }

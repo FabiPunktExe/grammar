@@ -29,6 +29,6 @@ class ChoiceGrammarTest {
             Grammar.symbol('z'),
             Grammar.symbol("de")
         )
-        assertFailure("Expected a symbol", 2, grammar.parse("abx"))
+        assertFailure("Expected one of ['c']", 2, grammar.parse("abx"))
     }
 }

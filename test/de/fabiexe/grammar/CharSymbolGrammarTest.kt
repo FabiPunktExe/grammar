@@ -22,9 +22,9 @@ class CharSymbolGrammarTest {
 
     @Test
     fun testExpectedFailures() {
-        assertFailure("Expected a symbol", 0, grammar.parse("def"))
-        assertFailure("Expected a symbol", 0, grammar.parse("dabc"))
-        assertFailure("Expected a symbol", 0, grammar.parse(" abc"))
-        assertFailure("Expected a symbol", 0, grammar.parse(""))
+        assertFailure("Expected one of ['a', 'b', 'c']", 0, grammar.parse("def"))
+        assertFailure("Expected one of ['a', 'b', 'c']", 0, grammar.parse("dabc"))
+        assertFailure("Expected one of ['a', 'b', 'c']", 0, grammar.parse(" abc"))
+        assertFailure("Expected one of ['a', 'b', 'c']", 0, grammar.parse(""))
     }
 }

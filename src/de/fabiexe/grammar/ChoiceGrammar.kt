@@ -6,13 +6,13 @@ class ChoiceGrammar<T>(val grammars: List<Grammar<out T>>) : Grammar<T> {
     }
 
     override fun parse(input: String): ParseResult<T> {
-        var bestFailure: ParseResult.Failure<T>? = null
+        var bestFailure: ParseResult.Failure? = null
         for (grammar in grammars) {
             when (val result = grammar.parse(input)) {
                 is ParseResult.Token -> return ParseResult.Token(result.token, result.position)
                 is ParseResult.Failure -> {
                     if (bestFailure == null || result.position > bestFailure.position) {
-                        bestFailure = ParseResult.Failure(result.error, result.position)
+                        bestFailure = result
                     }
                 }
             }

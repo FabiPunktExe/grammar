@@ -28,7 +28,7 @@ class SequenceGrammarTest {
 
     @Test
     fun testStopsAtFirstFailure() {
-        assertFailure("Expected a symbol", 2, abcdeGrammar.parse("abxde"))
+        assertFailure("Expected one of ['c']", 2, abcdeGrammar.parse("abxde"))
         assertFailure("Expected 'de'", 3, abcdeGrammar.parse("abcdx"))
     }
 

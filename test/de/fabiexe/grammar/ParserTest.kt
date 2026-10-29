@@ -19,17 +19,17 @@ class ParserTest {
 
     @Test
     fun testThrowsForTrailingInput() {
-        assertFailsWith<IllegalArgumentException>("Input not fully consumed (input length: 3, consumed: 1)") {
+        assertFailsWith<ParseException>("Input not fully consumed (input length: 3, consumed: 1)") {
             parse("abc", Grammar.symbol('a'))
         }
-        assertFailsWith<IllegalArgumentException>("Input not fully consumed (input length: 3, consumed: 2)") {
+        assertFailsWith<ParseException>("Input not fully consumed (input length: 3, consumed: 2)") {
             parse("abc", Grammar.symbol("ab"))
         }
     }
 
     @Test
     fun testThrowsOnFailure() {
-        assertFailsWith<IllegalArgumentException>("Failed to parse input: Expected a symbol at position 0") {
+        assertFailsWith<ParseException>("Failed to parse input: Expected one of ['a'] at position 0") {
             parse("x", Grammar.symbol('a'))
         }
     }
@@ -37,7 +37,7 @@ class ParserTest {
     @Test
     fun testEmptyInput() {
         assertEquals(Unit, parse("", Grammar.empty()))
-        assertFailsWith<IllegalArgumentException> {
+        assertFailsWith<ParseException>("Failed to parse input: Expected one of ['a'] at position 0") {
             parse("", Grammar.symbol('a'))
         }
     }
