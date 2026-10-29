@@ -1,6 +1,6 @@
 package de.fabiexe.grammar
 
-class CharSymbolGrammar(val symbols: Set<Char>) : Grammar<Char> {
+class CharSymbolGrammar(val symbols: Collection<Char>) : Grammar<Char> {
     init {
         require(symbols.isNotEmpty()) { "Symbol set cannot be empty" }
     }
