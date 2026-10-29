@@ -11,10 +11,10 @@ class CharSymbolGrammar(val symbols: Collection<Char>) : Grammar<Char> {
             if (first in symbols) {
                 ParseResult.Token(first, 1)
             } else {
-                ParseResult.Failure("Expected a symbol", 0)
+                ParseResult.Failure("Expected one of ${symbols.map { "'$it'" }}", 0)
             }
         } else {
-            ParseResult.Failure("Expected a symbol", 0)
+            ParseResult.Failure("Expected one of ${symbols.map { "'$it'" }}", 0)
         }
     }
 }
