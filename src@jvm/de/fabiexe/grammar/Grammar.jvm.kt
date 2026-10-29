@@ -16,6 +16,14 @@ fun <T, U> transform(grammar: Grammar<T>, transform: Function<T, U>): Grammar<U>
     return JvmTransformingGrammar(grammar, transform)
 }
 
+fun <T> transformResult(grammar: Grammar<Void?>, transform: Supplier<ParseResult<T>>): Grammar<T> {
+    return JvmResultTransformingGrammar(grammar) { _ -> transform.get() }
+}
+
+fun <T, U> transformResult(grammar: Grammar<T>, transform: Function<T, ParseResult<U>>): Grammar<U> {
+    return JvmResultTransformingGrammar(grammar, transform)
+}
+
 fun <T> recursive(definition: Function<Grammar<T>, Grammar<T>>): Grammar<T> {
     return JvmRecursiveGrammar(definition)
 }

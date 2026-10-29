@@ -7,6 +7,8 @@ interface Grammar<T> {
 
     fun <U> transform(transform: (token: T) -> U): Grammar<U> = TransformingGrammar(this, transform)
 
+    fun <U> transformResult(transform: (token: T) -> ParseResult<U>): Grammar<U> = ResultTransformingGrammar(this, transform)
+
     fun repeat(): Grammar<List<T>> = RepeatingGrammar(this, 0)
 
     fun repeat(min: Int): Grammar<List<T>> = RepeatingGrammar(this, min)
