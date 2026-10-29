@@ -1,11 +1,16 @@
 package de.fabiexe.grammar
 
+import kotlin.jvm.JvmOverloads
 import kotlin.jvm.JvmStatic
 
 interface Grammar<T> {
     fun parse(input: String): ParseResult<T>
 
     fun <U> transform(transform: (T) -> U): Grammar<U> = TransformingGrammar(this, transform)
+
+    fun repeat(): Grammar<List<T>> = RepeatingGrammar(this, 0)
+
+    fun repeat(min: Int): Grammar<List<T>> = RepeatingGrammar(this, min)
 
     companion object {
         @JvmStatic
