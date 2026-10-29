@@ -23,5 +23,11 @@ interface Grammar<T> {
 
         @JvmStatic
         fun <T> sequence(vararg grammars: Grammar<out T>): Grammar<List<T>> = SequenceGrammar(grammars.toList())
+
+        @JvmStatic
+        fun <T> choice(grammars: List<Grammar<T>>): Grammar<T> = ChoiceGrammar(grammars)
+
+        @JvmStatic
+        fun <T> choice(vararg grammars: Grammar<out T>): Grammar<T> = ChoiceGrammar(grammars.toList())
     }
 }
