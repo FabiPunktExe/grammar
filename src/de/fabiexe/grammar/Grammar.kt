@@ -7,6 +7,9 @@ interface Grammar<T> {
 
     companion object {
         @JvmStatic
-        fun symbol(symbols: Set<Char>): Grammar<Char> = SymbolGrammar(symbols)
+        fun symbol(symbols: Set<Char>): Grammar<Char> = CharSymbolGrammar(symbols)
+
+        @JvmStatic
+        fun symbol(string: String): Grammar<Unit> = StringSymbolGrammar(string)
     }
 }

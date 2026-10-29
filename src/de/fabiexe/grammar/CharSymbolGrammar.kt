@@ -1,6 +1,10 @@
 package de.fabiexe.grammar
 
-class SymbolGrammar(val symbols: Set<Char>) : Grammar<Char> {
+class CharSymbolGrammar(val symbols: Set<Char>) : Grammar<Char> {
+    init {
+        require(symbols.isNotEmpty()) { "Symbol set cannot be empty" }
+    }
+
     override fun parse(input: String): ParseResult<Char> {
         return if (input.isNotEmpty()) {
             val first = input[0]
