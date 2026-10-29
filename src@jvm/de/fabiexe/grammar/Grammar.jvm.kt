@@ -23,3 +23,7 @@ fun <T> recursive(definition: Function<Grammar<T>, Grammar<T>>): Grammar<T> {
 fun <T : Any> optional(grammar: Grammar<T>): Grammar<Optional<T>> {
     return OptionalGrammar(grammar)
 }
+
+fun <T : Any> optional(grammar: Grammar<T>, defaultValue: T): Grammar<T> {
+    return OptionalGrammar(grammar).transform { it.orElse(defaultValue)!! }
+}
