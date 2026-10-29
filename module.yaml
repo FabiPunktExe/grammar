@@ -17,5 +17,5 @@ settings:
     enabled: true
     group: de.fabiexe.grammar
     artifactId: grammar
-    version: 0.3.0
+    version: 0.3.1
     publishSources: true

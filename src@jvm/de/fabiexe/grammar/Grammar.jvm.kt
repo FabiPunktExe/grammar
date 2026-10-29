@@ -9,19 +9,19 @@ import java.util.function.Supplier
 fun empty(): Grammar<Void?> = JvmEmptyGrammar
 
 fun <T> transform(grammar: Grammar<Void?>, transform: Supplier<T>): Grammar<T> {
-    return JvmTransformingGrammar(grammar) { _ -> transform.get() }
+    return JvmTransformingGrammar(grammar, false) { _ -> transform.get() }
 }
 
 fun <T, U> transform(grammar: Grammar<T>, transform: Function<T, U>): Grammar<U> {
-    return JvmTransformingGrammar(grammar, transform)
+    return JvmTransformingGrammar(grammar, false, transform)
 }
 
-fun <T> transformResult(grammar: Grammar<Void?>, transform: Supplier<ParseResult<T>>): Grammar<T> {
-    return JvmResultTransformingGrammar(grammar) { _ -> transform.get() }
+fun <T> transformCatching(grammar: Grammar<Void?>, transform: Supplier<T>): Grammar<T> {
+    return JvmTransformingGrammar(grammar, true) { _ -> transform.get() }
 }
 
-fun <T, U> transformResult(grammar: Grammar<T>, transform: Function<T, ParseResult<U>>): Grammar<U> {
-    return JvmResultTransformingGrammar(grammar, transform)
+fun <T, U> transformCatching(grammar: Grammar<T>, transform: Function<T, U>): Grammar<U> {
+    return JvmTransformingGrammar(grammar, true, transform)
 }
 
 fun <T> recursive(definition: Function<Grammar<T>, Grammar<T>>): Grammar<T> {

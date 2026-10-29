@@ -5,9 +5,9 @@ import kotlin.jvm.JvmStatic
 interface Grammar<T> {
     fun parse(input: String): ParseResult<T>
 
-    fun <U> transform(transform: (token: T) -> U): Grammar<U> = TransformingGrammar(this, transform)
+    fun <U> transform(transform: (token: T) -> U): Grammar<U> = TransformingGrammar(this, false, transform)
 
-    fun <U> transformResult(transform: (token: T) -> ParseResult<U>): Grammar<U> = ResultTransformingGrammar(this, transform)
+    fun <U> transformCatching(transform: (token: T) -> U): Grammar<U> = TransformingGrammar(this, true, transform)
 
     fun repeat(): Grammar<List<T>> = RepeatingGrammar(this, 0)
 
