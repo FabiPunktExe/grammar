@@ -31,5 +31,8 @@ interface Grammar<T> {
 
         @JvmStatic
         fun <T> choice(vararg grammars: Grammar<out T>): Grammar<T> = ChoiceGrammar(grammars.toList())
+
+        @JvmStatic
+        fun <T> recursive(definition: (Grammar<T>) -> Grammar<T>): Grammar<T> = RecursiveGrammar(definition)
     }
 }
