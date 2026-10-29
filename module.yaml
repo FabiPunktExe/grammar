@@ -1,3 +1,21 @@
 product:
   type: kmp/lib
   platforms: [ jvm, mingwX64 ]
+
+repositories:
+  - id: diruptioPublic
+    url: https://repo.diruptio.de/repository/maven-public-releases
+    resolve: false
+    publish: true
+    credentials:
+      file: //local.properties
+      usernameKey: diruptio_repo_username
+      passwordKey: diruptio_repo_password
+
+settings:
+  publishing:
+    enabled: true
+    group: de.fabiexe.grammar
+    artifactId: grammar
+    version: 0.1.0
+    publishSources: true
