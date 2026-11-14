@@ -28,6 +28,14 @@ interface Grammar<T> {
         fun symbol(string: String): Grammar<String> = StringSymbolGrammar(string)
 
         @JvmStatic
+        @JvmSafeVarargs
+        fun anySymbol(excludedSymbols: Collection<Char>): Grammar<Char> = AnyCharSymbolGrammar(excludedSymbols)
+
+        @JvmStatic
+        @JvmSafeVarargs
+        fun anySymbol(vararg excludedSymbols: Char): Grammar<Char> = AnyCharSymbolGrammar(excludedSymbols.toSet())
+
+        @JvmStatic
         fun <T> sequence(grammars: List<Grammar<T>>): Grammar<List<T>> = SequenceGrammar(grammars)
 
         @JvmStatic
