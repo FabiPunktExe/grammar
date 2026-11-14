@@ -5,27 +5,27 @@ import kotlin.test.assertEquals
 
 class RecursiveGrammarTest {
     private val boolean = Grammar.choice(
-        Grammar.symbol("true").transform { true },
-        Grammar.symbol("false").transform { false }
+        Grammar.symbol("true").map { true },
+        Grammar.symbol("false").map { false }
     )
 
     private val expression: Grammar<Boolean> = Grammar.recursive { self ->
         val value = Grammar.choice(
             boolean,
-            Grammar.sequence(Grammar.symbol("("), self, Grammar.symbol(")")).transform { tokens ->
+            Grammar.sequence(Grammar.symbol("("), self, Grammar.symbol(")")).map { tokens ->
                 tokens[1] as Boolean
             }
         )
         val andExpression: Grammar<Boolean> = Grammar.recursive { andSelf ->
             Grammar.choice(
-                Grammar.sequence(value, Grammar.symbol(" and "), andSelf).transform { tokens ->
+                Grammar.sequence(value, Grammar.symbol(" and "), andSelf).map { tokens ->
                     tokens[0] as Boolean && tokens[2] as Boolean
                 },
                 value
             )
         }
         Grammar.choice(
-            Grammar.sequence(andExpression, Grammar.symbol(" or "), self).transform { tokens ->
+            Grammar.sequence(andExpression, Grammar.symbol(" or "), self).map { tokens ->
                 tokens[0] as Boolean || tokens[2] as Boolean
             },
             andExpression

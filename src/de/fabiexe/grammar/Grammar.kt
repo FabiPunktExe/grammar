@@ -5,9 +5,15 @@ import kotlin.jvm.JvmStatic
 interface Grammar<T> {
     fun parse(input: String): ParseResult<T>
 
-    fun <U> transform(transform: (token: T) -> U): Grammar<U> = TransformingGrammar(this, false, transform)
+    fun <U> map(transform: (token: T) -> U): Grammar<U> = MappingGrammar(this, false, transform)
 
-    fun <U> transformCatching(transform: (token: T) -> U): Grammar<U> = TransformingGrammar(this, true, transform)
+    @Deprecated("Use map instead", ReplaceWith("map(transform)"))
+    fun <U> transform(transform: (token: T) -> U): Grammar<U> = MappingGrammar(this, false, transform)
+
+    fun <U> mapCatching(transform: (token: T) -> U): Grammar<U> = MappingGrammar(this, true, transform)
+
+    @Deprecated("Use mapCatching instead", ReplaceWith("mapCatching(transform)"))
+    fun <U> transformCatching(transform: (token: T) -> U): Grammar<U> = MappingGrammar(this, true, transform)
 
     fun repeat(): Grammar<List<T>> = RepeatingGrammar(this, 0)
 
